@@ -1,0 +1,20 @@
+# 🚀 Day 1: Python Foundations for AI
+
+## 🧠 Concepts Mastered Today
+
+### 1. Core Data Structures & Logic
+
+- **Lists:** Handled ordered sequences of data (e.g., raw text reviews).
+- **Dictionaries:** Structured metadata using Key-Value pairs to build configuration maps.
+- **Functions:** Built modular logic blocks to act as preprocessing data pipelines.
+- **Integration:** Combined all three to build a rule-based Sentiment Analysis prototype.
+
+### 2. Object-Oriented Programming (OOP) Fundamentals
+
+- **Classes (Blueprints):** Learned to group variables (Attributes) and actions (Methods) into a unified code blueprint.
+- **Instances (Objects):** Created distinct, independent objects from a single class structure.
+- **AI Alignment:** Understood how modern machine learning frameworks (like PyTorch and Scikit-Learn) use OOP principles to instantiate models (`__init__`), train them (`train()`), and run inference (`predict()`).
+
+---
+
+_Next Step: Dive into Exception Handling (Safety Nets) and File Handling (Data streams)._
