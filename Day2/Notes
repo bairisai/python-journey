@@ -1,0 +1,254 @@
+# File Handling - Crucial Points
+
+## 1. Always Use `with`
+
+Never use raw `open()` and `close()` statements.
+
+The `with` keyword (Context Manager) automatically closes the file after use, preventing memory leaks and data corruption.
+
+Example:
+
+```python
+with open("data.txt", "r") as file:
+    data = file.read()
+```
+
+---
+
+## 2. Know Your File Modes
+
+### Read Mode (`"r"`)
+
+- Opens a file for reading.
+- Raises `FileNotFoundError` if the file does not exist.
+
+```python
+with open("data.txt", "r") as file:
+    content = file.read()
+```
+
+### Write Mode (`"w"`)
+
+- Overwrites all existing content.
+- Creates a new file if it does not exist.
+
+```python
+with open("data.txt", "w") as file:
+    file.write("Hello")
+```
+
+### Append Mode (`"a"`)
+
+- Preserves existing content.
+- Adds new content to the end of the file.
+
+```python
+with open("data.txt", "a") as file:
+    file.write("\nNew Entry")
+```
+
+---
+
+## 3. Read Large Files Efficiently
+
+Avoid:
+
+```python
+content = file.read()
+```
+
+This loads the entire file into memory.
+
+For large AI datasets, use line-by-line reading:
+
+```python
+with open("dataset.txt", "r") as file:
+    for line in file:
+        print(line.strip())
+```
+
+---
+
+## 4. Text vs Binary Files
+
+### Text Mode
+
+Used for:
+
+- TXT files
+- CSV files
+- JSON files
+
+Modes:
+
+```python
+"r"
+"w"
+"a"
+```
+
+### Binary Mode
+
+Used for:
+
+- Images
+- Audio files
+- AI model weights
+- Serialized objects
+
+Modes:
+
+```python
+"rb"
+"wb"
+```
+
+Example:
+
+```python
+with open("model.pkl", "rb") as file:
+    model = file.read()
+```
+
+==================================================
+
+# Exception Handling - Crucial Points
+
+## 1. Core Structure
+
+```python
+try:
+    # Risky code
+except ValueError:
+    # Handle error
+finally:
+    # Cleanup code
+```
+
+### try
+
+Place code that may fail.
+
+### except
+
+Handle specific exceptions.
+
+### finally
+
+Runs regardless of success or failure.
+
+Useful for:
+
+- Closing resources
+- Logging
+- Cleanup operations
+
+---
+
+## 2. Never Use Bare Except
+
+Avoid:
+
+```python
+except:
+    print("Error")
+```
+
+Preferred:
+
+```python
+except ValueError:
+    print("Invalid number")
+```
+
+or
+
+```python
+except FileNotFoundError:
+    print("File not found")
+```
+
+Specific exceptions make debugging easier.
+
+---
+
+## 3. Do Not Use Exceptions for Normal Logic
+
+Incorrect:
+
+```python
+try:
+    if age > 18:
+        print("Adult")
+except:
+    pass
+```
+
+Correct:
+
+```python
+if age > 18:
+    print("Adult")
+else:
+    print("Minor")
+```
+
+Use exceptions only for unpredictable situations such as:
+
+- Missing files
+- Invalid user input
+- Network failures
+- Database errors
+
+---
+
+## 4. Never Silence Errors
+
+Avoid:
+
+```python
+except ValueError:
+    pass
+```
+
+Preferred:
+
+```python
+except ValueError:
+    print("Warning: Invalid input received")
+```
+
+or
+
+```python
+except ValueError as e:
+    print(f"Error: {e}")
+```
+
+Always provide:
+
+- A warning message
+- Logging
+- A safe fallback value
+
+This makes debugging and maintenance significantly easier.
+
+==================================================
+
+# AI Engineering Connection
+
+File Handling:
+
+- Dataset ingestion
+- Reading CSV files
+- Loading documents for RAG systems
+- Saving model outputs
+- Loading AI model weights
+
+Exception Handling:
+
+- Handling missing datasets
+- Managing API failures
+- Recovering from network issues
+- Validating user inputs
+- Building production-grade AI systems
