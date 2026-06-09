@@ -1,0 +1,332 @@
+# Type Hints in Python
+
+## 🏷️ The Sticky Note Analogy
+
+Python is a dynamically typed language.
+
+This means Python allows variables to hold any type of value without requiring explicit declarations.
+
+Example:
+
+```python
+data = "Hello"
+data = 100
+data = [1, 2, 3]
+```
+
+Python allows all of the above.
+
+---
+
+Type hints are like sticky notes attached to variables and functions.
+
+They do not enforce type safety at runtime, but they clearly communicate:
+
+- What type of data is expected
+- What type of data will be returned
+- How developers should use the code
+
+They improve readability, maintainability, and tooling support.
+
+==================================================
+
+# Core Syntax
+
+## Variables
+
+```python
+name: str = "Krishnasai"
+age: int = 25
+salary: float = 50000.50
+is_active: bool = True
+```
+
+Syntax:
+
+```python
+variable_name: type = value
+```
+
+---
+
+## Function Parameters and Return Types
+
+Without Type Hints:
+
+```python
+def process_review(review, rating):
+    pass
+```
+
+Problems:
+
+- Unknown parameter types
+- Unknown return type
+- Difficult to understand usage
+
+---
+
+With Type Hints:
+
+```python
+def process_review(review: str, rating: int) -> str:
+    return f"Review: {review} | Rating: {rating}/5"
+```
+
+Meaning:
+
+- review must be a string
+- rating must be an integer
+- function returns a string
+
+Syntax:
+
+```python
+parameter: type
+```
+
+Return Type:
+
+```python
+-> return_type
+```
+
+==================================================
+
+# Type Hinting Collections
+
+## List
+
+A list containing only floating-point numbers:
+
+```python
+probabilities: list[float] = [0.95, 0.02, 0.03]
+```
+
+Meaning:
+
+- List is expected
+- Every element should be a float
+
+---
+
+## Dictionary
+
+A dictionary mapping strings to integers:
+
+```python
+label_mapping: dict[str, int] = {
+    "positive": 1,
+    "negative": 0
+}
+```
+
+Meaning:
+
+- Keys are strings
+- Values are integers
+
+---
+
+## Function with Complex Types
+
+```python
+def train_model(
+    dataset: list[str],
+    hyperparams: dict[str, float]
+) -> bool:
+
+    print("Training model...")
+    return True
+```
+
+Meaning:
+
+dataset:
+
+```python
+list[str]
+```
+
+hyperparams:
+
+```python
+dict[str, float]
+```
+
+returns:
+
+```python
+bool
+```
+
+==================================================
+
+# Why Type Hints Matter in AI Engineering
+
+## 1. AI Data Structures Are Complex
+
+AI systems frequently work with:
+
+- Text data
+- Numerical vectors
+- Embeddings
+- Prediction probabilities
+- Configuration dictionaries
+
+Type hints make expected data structures explicit.
+
+Example:
+
+```python
+embeddings: list[float]
+```
+
+Immediately communicates:
+
+"Expected input is a numerical vector."
+
+---
+
+## 2. Better Editor Autocomplete
+
+When using:
+
+```python
+text: str = "Hello World"
+```
+
+Your editor understands that:
+
+```python
+text.
+```
+
+should suggest:
+
+```python
+lower()
+split()
+strip()
+replace()
+upper()
+```
+
+This significantly improves developer productivity.
+
+---
+
+## 3. Static Type Checking
+
+Tools such as:
+
+- mypy
+- pyright
+
+can analyze code before execution.
+
+Example:
+
+```python
+def greet(name: str):
+    print(name)
+
+greet(100)
+```
+
+Static analysis tools can detect the issue before deployment.
+
+This helps prevent bugs in production systems.
+
+==================================================
+
+# Important Interview Points
+
+## Type Hints Do NOT Enforce Types
+
+Python will still run:
+
+```python
+def greet(name: str):
+    print(name)
+
+greet(123)
+```
+
+because type hints are not runtime validation.
+
+They are primarily intended for:
+
+- Developers
+- IDEs
+- Static analysis tools
+
+---
+
+## Type Hints Improve Readability
+
+Without hints:
+
+```python
+def process(data):
+    pass
+```
+
+Questions:
+
+- What is data?
+- String?
+- List?
+- Dictionary?
+
+---
+
+With hints:
+
+```python
+def process(data: list[str]) -> bool:
+    pass
+```
+
+The code becomes self-documenting.
+
+==================================================
+
+# Common Type Hints
+
+```python
+str
+int
+float
+bool
+list
+dict
+tuple
+set
+None
+```
+
+Examples:
+
+```python
+name: str
+age: int
+price: float
+active: bool
+
+scores: list[int]
+mapping: dict[str, int]
+```
+
+==================================================
+
+# Key Takeaways
+
+1. Python is dynamically typed.
+2. Type hints improve readability and maintainability.
+3. Use ":" for variables and parameters.
+4. Use "->" for return types.
+5. Type hints do not enforce runtime validation.
+6. IDEs use type hints for better autocomplete.
+7. Tools like mypy and pyright use type hints for static error checking.
+8. Type hints are considered a best practice in modern Python and AI engineering projects.
