@@ -252,3 +252,310 @@ Exception Handling:
 - Recovering from network issues
 - Validating user inputs
 - Building production-grade AI systems
+
+# Generators in Python
+
+## 🍩 The Donut Factory Analogy
+
+### Normal Function (The Memory Hog)
+
+Imagine ordering 1,000,000 donuts.
+
+The baker makes all 1,000,000 donuts at once and dumps them onto your kitchen counter.
+
+Result:
+
+- Huge memory usage
+- Slow startup time
+- Can crash if data is too large
+
+---
+
+### Generator Function (The Smart Baker)
+
+Imagine standing at a buffet.
+
+The baker creates exactly one donut and hands it to you.
+
+Only after you finish eating it does the baker create the next one.
+
+Result:
+
+- Minimal memory usage
+- Faster startup
+- Can handle extremely large datasets
+
+---
+
+# Core Concept: return vs yield
+
+## return
+
+A normal function:
+
+- Executes completely
+- Stores all results in memory
+- Returns everything at once
+- Function terminates
+
+Example:
+
+```python id="z0w7jl"
+def normal_counter(max_num):
+    result = []
+
+    for i in range(max_num):
+        result.append(i)
+
+    return result
+```
+
+Memory grows as data grows.
+
+---
+
+## yield
+
+A generator function:
+
+- Produces one value at a time
+- Pauses execution after each value
+- Remembers its state
+- Resumes when requested
+
+Example:
+
+```python id="kz7c3u"
+def generator_counter(max_num):
+    for i in range(max_num):
+        yield i
+```
+
+Memory remains nearly constant regardless of dataset size.
+
+---
+
+# How Generators Work
+
+Calling a generator function does NOT execute it immediately.
+
+Instead, it returns a generator object.
+
+Example:
+
+```python id="uhhrp4"
+my_stream = generator_counter(3)
+
+print(next(my_stream))
+print(next(my_stream))
+print(next(my_stream))
+```
+
+Output:
+
+```text id="ekz4mj"
+0
+1
+2
+```
+
+Each call to next():
+
+- Resumes execution
+- Runs until the next yield
+- Returns the yielded value
+- Pauses again
+
+---
+
+# Using Generators with a for Loop
+
+Most commonly:
+
+```python id="lpvh39"
+for number in generator_counter(3):
+    print(number)
+```
+
+Output:
+
+```text id="eufg8y"
+0
+1
+2
+```
+
+The for loop automatically calls next() behind the scenes.
+
+---
+
+# Why Generators Matter in AI
+
+Consider:
+
+- 100,000 images
+- 50 GB dataset
+
+Bad approach:
+
+```python id="c4lbw8"
+images = load_all_images()
+```
+
+Problems:
+
+- Massive RAM consumption
+- Slow startup
+- Possible MemoryError
+
+---
+
+Better approach:
+
+```python id="4e8tbf"
+for image in image_generator():
+    train_model(image)
+```
+
+Process:
+
+1. Load Image #1
+2. Train model
+3. Remove from memory
+4. Load Image #2
+5. Repeat
+
+Benefits:
+
+- Low memory usage
+- Scalable processing
+- Production-ready approach
+
+---
+
+# Real AI Usage
+
+Generators power many data pipelines.
+
+Examples:
+
+- PyTorch DataLoader
+- Dataset streaming
+- Log processing
+- ETL pipelines
+- Large CSV processing
+- Real-time event streams
+
+---
+
+# Crucial Interview Points
+
+## 1. The yield Keyword
+
+Any function containing yield automatically becomes a generator.
+
+Example:
+
+```python id="9qgqqg"
+def numbers():
+    yield 1
+    yield 2
+```
+
+---
+
+## 2. Lazy Evaluation
+
+Generators compute values only when requested.
+
+Benefits:
+
+- Saves memory
+- Saves CPU resources
+- Faster startup
+
+---
+
+## 3. Single Pass
+
+Generators can only be traversed once.
+
+Example:
+
+```python id="x9w6oq"
+gen = generator_counter(3)
+
+for item in gen:
+    print(item)
+
+for item in gen:
+    print(item)
+```
+
+The second loop prints nothing because the generator is exhausted.
+
+To reuse it:
+
+```python id="i5g9r7"
+gen = generator_counter(3)
+```
+
+Create a new generator object.
+
+---
+
+## 4. Infinite Streams
+
+Generators can produce unlimited data because they do not store everything in memory.
+
+Example:
+
+```python id="r5d0a8"
+def infinite_numbers():
+    num = 0
+
+    while True:
+        yield num
+        num += 1
+```
+
+This can run indefinitely without filling RAM.
+
+## next() gives explicit control over generator execution and is useful when I need values on demand. In most practical situations, a for loop is preferred because it automatically handles iteration and generator exhaustion.
+
+"Generators are stateful iterators. They produce values lazily and do not store the entire dataset in memory. As values are consumed, the generator advances its internal state. Once it reaches the end and raises StopIteration, it is exhausted and cannot be reused. To iterate again, a new generator object must be created."
+
+# Generator vs List
+
+List:
+
+- Stores Data
+- Can Reuse
+- More Memory
+
+Generator:
+
+- Creates Data
+- One-Time Stream
+- Low Memory
+
+# Think:
+
+- List, Like a downloaded movie.You can watch it: 100 times or even 1000 times, because it's stored.
+- Generator, Like a live cricket match stream.Once the over is gone:It is gone.
+  You can't rewind the stream unless you start a new stream.
+
+# Key Takeaway
+
+Normal Function:
+
+- Uses return
+- Stores all data in memory
+- Suitable for small datasets
+
+Generator Function:
+
+- Uses yield
+- Produces data one item at a time
+- Memory efficient
+- Essential for large-scale AI and data processing systems
