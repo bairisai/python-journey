@@ -1,0 +1,48 @@
+======================================================================
+🚀 DAY 3 NOTES: CLASSES, OBJECTS, DATACLASSES, & MODULES
+======================================================================
+
+1. ADVANCED CLASSES & OBJECTS MECHANICS
+----------------------------------------------------------------------
+* The 'self' Keyword: Represents the specific, individual object 
+  currently being handled. It keeps data isolated so objects don't 
+  overwrite each other.
+* Instance Attributes: Unique data bound to one specific object. 
+  Defined inside '__init__' using 'self.variable_name'.
+* Class Attributes: Shared global data bound to the blueprint itself. 
+  Defined directly under the class name. Every object created shares 
+  this exact variable.
+* AI Use-Case: Class attributes store the universal framework version 
+  (e.g., PyTorch 2.5), while instance attributes store the unique weights 
+  of individual AI models.
+
+2. DATACLASSES (THE AI CONFIGURATION SHORTCUT)
+----------------------------------------------------------------------
+* Purpose: AI engineering involves writing classes that only store data 
+  (hyperparameters, training logs, dataset metadata). Traditional OOP 
+  requires writing boring '__init__' methods for every variable.
+* The Shortcut: Importing '@dataclass' automates everything. It automatically 
+  generates the constructor, type definitions, and a clean print format.
+* When to use: Use dataclasses when a class is just a container for data 
+  and doesn't require heavy internal logic.
+
+3. MODULES (CLEAN ARCHITECTURE)
+----------------------------------------------------------------------
+* Definition: A module is simply a '.py' code file. 
+* Purpose: Keeps codebases organized. Instead of one massive 2,000-line 
+  file, code is split into single-responsibility files.
+* AI Layout: Professional AI architectures split work into separate modules:
+  - config.py (settings)
+  - data_loader.py (generators)
+  - model.py (neural network class blueprints)
+  - main.py (execution script)
+* Import Rules: Bring modules into other files using:
+  'import module_name' OR 'from module_name import specific_class'
+
+======================================================================
+📌 KEY SUMMARY:
+- Class attributes = Shared globally.
+- Instance attributes = Isolated unique data.
+- @dataclass = Auto-generates boilerplate constructor code.
+- Modules = Structural python files enabling clean imports.
+======================================================================
