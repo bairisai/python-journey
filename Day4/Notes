@@ -1,0 +1,58 @@
+======================================================================
+🚀 DAY 4 NOTES: INHERITANCE, POLYMORPHISM, ABCs, & COMPOSITION
+======================================================================
+
+1. INHERITANCE (THE "IS-A" RELATIONSHIP)
+
+---
+
+- Definition: A child class inherits all attributes and methods from a
+  parent class. This prevents code repetition.
+- The 'super()' Keyword: Used to call and run the parent class's
+  constructor ('**init**') from inside the child class.
+- AI Use-Case: You almost never write an AI model from scratch. You
+  inherit from a base framework model (like PyTorch's 'nn.Module')
+  and build your custom layers on top of it.
+
+2. POLYMORPHISM (MANY FORMS)
+
+---
+
+- Definition: The ability for different classes to have methods with the
+  exact same name but entirely different internal logic.
+- Purpose: Allows you to write code that interacts with multiple types
+  of objects without needing to know their specific class.
+- AI Use-Case: You have a TextModel and an ImageModel. Both have a
+  '.predict()' method. Your application can loop through a list of
+  mixed models and call '.predict()' on all of them seamlessly.
+
+3. ABSTRACT BASE CLASSES / ABC (THE ARCHITECTURAL CONTRACT)
+
+---
+
+- Definition: A strict master blueprint that cannot be instantiated
+  directly. It forces all child classes to implement specific methods.
+- Syntax: Uses the 'abc' module, inheriting from 'ABC', and tagging
+  enforced methods with '@abstractmethod'.
+- Purpose: Safety and standardization. It guarantees that any new model
+  added to your pipeline by other team members won't break the app.
+
+4. COMPOSITION (THE "HAS-A" RELATIONSHIP)
+
+---
+
+- Definition: Building a complex class by putting smaller, independent
+  classes inside it as components, instead of relying on deep inheritance.
+- Rule of Thumb: Prefer composition over inheritance when classes share
+  components rather than a strict genetic identity.
+- AI Use-Case: An AI training 'Pipeline' class isn't "born" from a
+  DataLoader or a Model. Instead, it _has a_ DataLoader, _has a_ Model,
+  and _has a_ Logger inside it to get the job done.
+
+======================================================================
+📌 KEY SHORTCUT SUMMARY FOR GIT OR NOTES:
+
+- Inheritance: Child inherits parent code ("Is-A" model).
+- Polymorphism: Same method name, different internal logic.
+- ABC: Strict interface contract enforcing custom implementation.
+- # Composition: Combining small objects into a larger machine ("Has-A").
