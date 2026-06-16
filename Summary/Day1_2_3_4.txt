@@ -1,0 +1,718 @@
+```text
+============================================================
+PYTHON + AI JOURNEY
+LAST-MINUTE REVISION NOTES (DAY 1 - DAY 4)
+============================================================
+
+============================================================
+DAY 1 - PYTHON FOUNDATIONS
+============================================================
+
+DATA TYPES
+----------
+
+str     -> Text
+int     -> Whole Numbers
+float   -> Decimal Numbers
+bool    -> True / False
+
+Examples:
+
+name = "Krishna"
+age = 25
+salary = 50000.50
+is_active = True
+
+------------------------------------------------------------
+
+LISTS
+-----
+
+Ordered and Mutable Collection
+
+players = ["Virat", "Rohit", "Gill"]
+
+Common Operations:
+
+players.append("Dhoni")
+players.remove("Gill")
+
+print(players[0])
+
+Used In:
+- AI datasets
+- Batch processing
+- Predictions
+- Collections of objects
+
+------------------------------------------------------------
+
+DICTIONARIES
+------------
+
+Key-Value Storage
+
+player = {
+    "name": "Virat",
+    "runs": 14000
+}
+
+Access:
+
+player["name"]
+
+Used In:
+- JSON APIs
+- Metadata
+- AI Configurations
+- API Responses
+
+------------------------------------------------------------
+
+FUNCTIONS
+---------
+
+Reusable Blocks of Code
+
+def greet(name):
+    return f"Hello {name}"
+
+Important:
+- Avoid code duplication
+- Improve readability
+- Used heavily in AI pipelines
+
+============================================================
+DAY 2 - FILE HANDLING, EXCEPTIONS, GENERATORS, TYPE HINTS
+============================================================
+
+FILE HANDLING
+-------------
+
+Always Use:
+
+with open("file.txt", "r") as file:
+    data = file.read()
+
+Benefits:
+- Auto closes file
+- Cleaner code
+- Safer
+
+------------------------------------------------------------
+
+FILE MODES
+----------
+
+"r"  -> Read
+"w"  -> Write (Overwrite)
+"a"  -> Append
+"rb" -> Read Binary
+"wb" -> Write Binary
+
+------------------------------------------------------------
+
+LARGE FILE PROCESSING
+---------------------
+
+Bad:
+
+data = file.read()
+
+Loads entire file into RAM.
+
+Good:
+
+for line in file:
+    process(line)
+
+Used For:
+- Large CSV files
+- AI datasets
+- Log files
+- Streaming data
+
+------------------------------------------------------------
+
+EXCEPTION HANDLING
+------------------
+
+Purpose:
+Prevent program crashes.
+
+Structure:
+
+try:
+    risky_code()
+
+except ValueError:
+    handle_error()
+
+finally:
+    cleanup()
+
+------------------------------------------------------------
+
+BEST PRACTICES
+--------------
+
+GOOD:
+
+except FileNotFoundError:
+except ValueError:
+
+BAD:
+
+except:
+
+------------------------------------------------------------
+
+NEVER SILENCE ERRORS
+--------------------
+
+BAD:
+
+except ValueError:
+    pass
+
+GOOD:
+
+except ValueError:
+    print("Invalid input")
+
+------------------------------------------------------------
+
+GENERATORS
+----------
+
+Normal Function:
+
+def numbers():
+    return [1, 2, 3]
+
+Generator:
+
+def numbers():
+    yield 1
+    yield 2
+    yield 3
+
+------------------------------------------------------------
+
+RETURN VS YIELD
+---------------
+
+return:
+- Returns everything
+- Function ends
+
+yield:
+- Returns one value
+- Pauses function
+- Resumes later
+
+------------------------------------------------------------
+
+GENERATOR ANALOGY
+-----------------
+
+LIST
+----
+Downloaded Movie
+
+- Stored in memory
+- Can watch repeatedly
+- More RAM
+
+GENERATOR
+---------
+Live Cricket Stream
+
+- Generated on demand
+- Low RAM
+- One-time stream
+- Cannot rewind
+
+------------------------------------------------------------
+
+GENERATOR EXHAUSTION
+--------------------
+
+gen = numbers()
+
+for item in gen:
+    print(item)
+
+for item in gen:
+    print(item)
+
+Output:
+
+Nothing
+
+Reason:
+Generator already consumed.
+
+Need:
+
+gen = numbers()
+
+again.
+
+------------------------------------------------------------
+
+WHY AI USES GENERATORS
+----------------------
+
+Instead of:
+
+Load 100,000 images into RAM
+
+Generator approach:
+
+Load Image 1
+Train
+Discard
+
+Load Image 2
+Train
+Discard
+
+Benefits:
+- Low memory
+- Faster startup
+- Scalable
+
+------------------------------------------------------------
+
+TYPE HINTS
+----------
+
+Purpose:
+Self-documenting code
+
+Variables:
+
+name: str = "Krishna"
+age: int = 25
+
+Functions:
+
+def greet(name: str) -> str:
+    return f"Hello {name}"
+
+------------------------------------------------------------
+
+COLLECTION TYPE HINTS
+---------------------
+
+scores: list[float]
+
+mapping: dict[str, int]
+
+------------------------------------------------------------
+
+IMPORTANT FACT
+--------------
+
+Type Hints DO NOT enforce types.
+
+Python still executes code.
+
+Used by:
+- IDEs
+- Developers
+- mypy
+- pyright
+
+Benefits:
+- Readability
+- Autocomplete
+- Static Analysis
+
+============================================================
+DAY 3 - OOP, DATACLASSES, MODULES
+============================================================
+
+CLASS VS OBJECT
+---------------
+
+Class:
+Blueprint
+
+Object:
+Actual Instance
+
+Example:
+
+class Employee:
+    pass
+
+emp = Employee()
+
+------------------------------------------------------------
+
+CONSTRUCTOR (__init__)
+----------------------
+
+Runs automatically when object is created.
+
+class Employee:
+
+    def __init__(self, name):
+        self.name = name
+
+Usage:
+
+emp = Employee("Krishna")
+
+------------------------------------------------------------
+
+SELF
+----
+
+Python's version of Java's:
+
+this
+
+Python:
+
+self
+
+Meaning:
+Reference to current object.
+
+------------------------------------------------------------
+
+ATTRIBUTES
+----------
+
+Object State
+
+class Employee:
+
+    def __init__(self, name):
+        self.name = name
+
+Each object maintains its own state.
+
+------------------------------------------------------------
+
+METHODS
+-------
+
+Functions inside classes.
+
+class Employee:
+
+    def greet(self):
+        print("Hello")
+
+Usage:
+
+emp.greet()
+
+------------------------------------------------------------
+
+DATACLASSES
+-----------
+
+Used for data-only objects.
+
+Without Dataclass:
+
+class Review:
+
+    def __init__(self, text, rating):
+        self.text = text
+        self.rating = rating
+
+With Dataclass:
+
+from dataclasses import dataclass
+
+@dataclass
+class Review:
+    text: str
+    rating: int
+
+Benefits:
+- Less code
+- Cleaner
+- Auto-generated constructor
+
+------------------------------------------------------------
+
+MODULES
+-------
+
+A Python file is a module.
+
+Example:
+
+utils.py
+
+------------------------------------------------------------
+
+IMPORTS
+-------
+
+Import Entire Module:
+
+import math
+
+math.sqrt(25)
+
+Import Specific Function:
+
+from math import sqrt
+
+sqrt(25)
+
+Alias:
+
+import pandas as pd
+
+------------------------------------------------------------
+
+WHY MODULES EXIST
+-----------------
+
+Bad:
+
+main.py
+5000+ lines
+
+Good:
+
+project/
+
+main.py
+utils.py
+database.py
+models.py
+
+Benefits:
+- Separation of concerns
+- Reusability
+- Scalability
+
+============================================================
+DAY 4 - INHERITANCE, POLYMORPHISM, ABC, COMPOSITION
+============================================================
+
+INHERITANCE
+-----------
+
+Parent Class:
+
+class Employee:
+    pass
+
+Child Class:
+
+class AIEngineer(Employee):
+    pass
+
+Meaning:
+
+AIEngineer IS-A Employee
+
+------------------------------------------------------------
+
+METHOD OVERRIDING
+-----------------
+
+Parent:
+
+class Employee:
+
+    def work(self):
+        print("Working")
+
+Child:
+
+class AIEngineer(Employee):
+
+    def work(self):
+        print("Building AI Systems")
+
+Child replaces parent behavior.
+
+------------------------------------------------------------
+
+SUPER()
+-------
+
+Calls parent implementation.
+
+class AIEngineer(Employee):
+
+    def __init__(self, name, tech):
+        super().__init__(name)
+        self.tech = tech
+
+Benefits:
+- Reuse parent logic
+- Cleaner code
+
+------------------------------------------------------------
+
+POLYMORPHISM
+------------
+
+Same method.
+Different behavior.
+
+class SentimentModel:
+
+    def predict(self):
+        return "Positive"
+
+class SpamModel:
+
+    def predict(self):
+        return "Spam"
+
+for model in models:
+    print(model.predict())
+
+Output varies by object.
+
+------------------------------------------------------------
+
+REAL AI EXAMPLE
+---------------
+
+model.predict()
+
+Could be:
+
+- GPT
+- BERT
+- Llama
+- Custom Model
+
+Code remains unchanged.
+
+------------------------------------------------------------
+
+ABSTRACT BASE CLASS (ABC)
+-------------------------
+
+from abc import ABC, abstractmethod
+
+class AIModel(ABC):
+
+    @abstractmethod
+    def predict(self):
+        pass
+
+Forces child classes to implement methods.
+
+------------------------------------------------------------
+
+WHY ABC EXISTS
+--------------
+
+Defines a contract.
+
+Every child must implement:
+
+predict()
+
+Used heavily in frameworks.
+
+------------------------------------------------------------
+
+COMPOSITION
+-----------
+
+Preferred over inheritance in many cases.
+
+HAS-A Relationship
+
+Example:
+
+ReviewProcessor HAS-A FileManager
+
+class ReviewProcessor:
+
+    def __init__(self, file_manager):
+        self.file_manager = file_manager
+
+------------------------------------------------------------
+
+INHERITANCE VS COMPOSITION
+--------------------------
+
+Inheritance:
+
+IS-A
+
+Example:
+AIEngineer IS-A Employee
+
+Composition:
+
+HAS-A
+
+Example:
+ReviewProcessor HAS-A FileManager
+
+------------------------------------------------------------
+
+DUCK TYPING
+-----------
+
+Python Philosophy:
+
+"If it looks like a duck and quacks like a duck,
+it is a duck."
+
+Python often cares about behavior,
+not inheritance.
+
+Example:
+
+If object has:
+
+predict()
+
+it can often be used directly.
+
+============================================================
+MOST IMPORTANT INTERVIEW ONE-LINERS
+============================================================
+
+Generator:
+"Produces values lazily using yield and avoids storing
+the entire dataset in memory."
+
+Type Hints:
+"Optional annotations that improve readability,
+autocomplete, and static analysis."
+
+self:
+"Reference to the current object instance."
+
+__init__:
+"Constructor automatically called during object creation."
+
+Dataclass:
+"Reduces boilerplate for data-centric classes."
+
+Inheritance:
+"Allows a child class to reuse parent functionality."
+
+Polymorphism:
+"Same interface, different implementations."
+
+ABC:
+"Defines a contract that child classes must follow."
+
+Composition:
+"Models a HAS-A relationship and is often preferred
+over inheritance."
+
+
