@@ -1,0 +1,59 @@
+======================================================================
+DAY 5 NOTES: PACKAGES, ITERATORS, DECORATORS, & CONTEXT MANAGERS
+======================================================================
+
+1. PYTHON PACKAGES & PROJECT STRUCTURE
+----------------------------------------------------------------------
+* Module vs Package: A module is a single '.py' file. A package is a 
+  directory containing multiple modules and an '__init__.py' file.
+* __init__.py: Marks a directory as a Python package. It executes 
+  automatically when the package is imported and handles initialization.
+* Absolute Imports: Specifying the full path from the project's root 
+  directory (e.g., 'from models.review import ReviewModel'). Always 
+  preferred in production for maximum clarity.
+* Relative Imports: Uses dots to import relative to the current module's 
+  location (e.g., 'from .utils import clean_text'). Can easily break if 
+  the main entry script changes position.
+
+2. ITERATORS (UNDER THE HOOD)
+----------------------------------------------------------------------
+* Iterable: Any object that can return an iterator (e.g., Lists, Dicts, 
+  Strings). It implements the '__iter__()' method.
+* Iterator: The stateful object that actually fetches elements one by 
+  one using the '__next__()' method. It keeps track of its current index.
+* StopIteration: A built-in exception raised by an iterator when there 
+  are no more elements left, signaling loops to halt safely.
+* How 'for' Loops Work: Under the hood, Python's 'for item in collection:' 
+  statement executes exactly like this:
+    _iterator = iter(collection)
+    while True:
+        try:
+            item = next(_iterator)
+            # ... loop body runs ...
+        except StopIteration:
+            break
+
+3. DECORATORS (METAPROGRAMMING & WRAPPERS)
+----------------------------------------------------------------------
+* Core Concept: Functions in Python are first-class citizens. They can 
+  be passed as arguments, nested inside other functions, and returned.
+* Decorator: A function that takes another function as input, extends or 
+  modifies its behavior without editing the source code, and returns it.
+* Closures: The inner wrapper function remembers the variables of the 
+  outer decorator function even after the outer function finishes executing.
+* functools.wraps: A vital decorator applied to the inner wrapper. It 
+  preserves the original function's identity, name, and docstrings.
+* FastAPI Context: FastAPI uses decorators like '@app.get("/")' to register 
+  your custom Python functions directly into its internal routing engine.
+
+4. CONTEXT MANAGERS (RESOURCE MANAGEMENT)
+----------------------------------------------------------------------
+* Purpose: Ensures that system resources (files, databases, GPU memory 
+  allocations) are cleanly set up and torn down, preventing leaks.
+* Magic Methods:
+  - '__enter__()': Runs immediately when entering the 'with' block.
+  - '__exit__()': Runs automatically when leaving the block, even if an 
+    error or exception occurs inside it.
+* Why 'with open()' Auto-Closes: The built-in file object implements 
+  '__exit__()', which calls '.close()' under the hood automatically.
+
