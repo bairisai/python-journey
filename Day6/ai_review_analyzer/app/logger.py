@@ -1,8 +1,8 @@
 import logging
-import os
 from pathlib import Path
 
-log_dir = Path(__file__).resolve().parent / "logs"
+project_root = Path(__file__).resolve().parent.parent
+log_dir = project_root / "logs"
 log_dir.mkdir(exist_ok=True)
 
 logging.basicConfig(
