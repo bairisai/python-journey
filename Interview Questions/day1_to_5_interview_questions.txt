@@ -1,0 +1,850 @@
+===============================================================
+PYTHON INTERVIEW NOTES
+DAY 1 - DAY 5
+Python + AI Engineer Interview Preparation
+Author: Krishnasai
+===============================================================
+
+===============================================================
+1. Why did you choose Python for AI instead of Java?
+===============================================================
+
+Answer:
+
+Python has become the standard language for AI because of its simplicity,
+readability, and vast ecosystem of AI libraries such as NumPy, Pandas,
+Scikit-learn, TensorFlow, PyTorch, LangChain, and Hugging Face.
+
+Although Java is excellent for enterprise applications, Python enables
+faster experimentation, shorter development time, and has stronger
+community support in AI and Machine Learning.
+
+---------------------------------------------------------------
+
+===============================================================
+2. Is Python Compiled or Interpreted?
+===============================================================
+
+Answer:
+
+Python is an interpreted language.
+
+The source code is first compiled into bytecode (.pyc), which is then
+executed by the Python Virtual Machine (PVM).
+
+Flow:
+
+Python Code
+      ↓
+Bytecode (.pyc)
+      ↓
+Python Virtual Machine
+      ↓
+Execution
+
+---------------------------------------------------------------
+
+===============================================================
+3. Why is Python called Dynamically Typed?
+===============================================================
+
+Answer:
+
+Python determines the data type at runtime.
+
+Example:
+
+x = 10
+x = "Hello"
+
+The same variable can store different data types without explicit
+declarations.
+
+---------------------------------------------------------------
+
+===============================================================
+4. Difference between List and Tuple
+===============================================================
+
+List:
+- Mutable
+- Uses []
+- Slower
+- More memory
+
+Tuple:
+- Immutable
+- Uses ()
+- Faster
+- Less memory
+
+Use List when data changes.
+Use Tuple when data should remain constant.
+
+---------------------------------------------------------------
+
+===============================================================
+5. Why are Dictionaries Faster than Lists for Searching?
+===============================================================
+
+Answer:
+
+Lists search sequentially (O(n)).
+
+Dictionaries use hash tables.
+
+Average lookup complexity:
+
+O(1)
+
+This makes dictionaries ideal for:
+
+- Configurations
+- JSON data
+- API responses
+- AI metadata
+
+---------------------------------------------------------------
+
+===============================================================
+6. What are Functions?
+===============================================================
+
+Answer:
+
+Functions are reusable blocks of code that perform a specific task.
+
+Benefits:
+
+- Reusability
+- Better readability
+- Modular programming
+- Easier testing
+
+---------------------------------------------------------------
+
+===============================================================
+7. What is the difference between return and print?
+===============================================================
+
+print()
+
+Displays output on screen.
+
+return
+
+Sends a value back to the caller.
+
+Example:
+
+def add(a, b):
+    return a + b
+
+---------------------------------------------------------------
+
+===============================================================
+8. What is Exception Handling?
+===============================================================
+
+Answer:
+
+Exception handling prevents program crashes by handling unexpected runtime
+errors gracefully.
+
+Syntax:
+
+try
+except
+finally
+
+---------------------------------------------------------------
+
+===============================================================
+9. Why shouldn't we use a bare except?
+===============================================================
+
+Answer:
+
+A bare except catches every exception, including unexpected bugs.
+
+Instead use:
+
+except ValueError:
+except FileNotFoundError:
+
+This improves debugging and maintainability.
+
+---------------------------------------------------------------
+
+===============================================================
+10. What is finally?
+===============================================================
+
+Answer:
+
+The finally block always executes regardless of whether an exception
+occurs.
+
+Common use cases:
+
+- Closing files
+- Closing database connections
+- Releasing resources
+
+---------------------------------------------------------------
+
+===============================================================
+11. Why do we use "with open()"?
+===============================================================
+
+Answer:
+
+The with statement automatically closes the file after use, even if an
+exception occurs.
+
+Benefits:
+
+- Prevents resource leaks
+- Cleaner code
+- Exception-safe
+
+---------------------------------------------------------------
+
+===============================================================
+12. Difference between File Modes
+===============================================================
+
+r  -> Read
+
+w -> Write (Overwrite)
+
+a -> Append
+
+rb -> Read Binary
+
+wb -> Write Binary
+
+---------------------------------------------------------------
+
+===============================================================
+13. Why shouldn't we use file.read() for huge datasets?
+===============================================================
+
+Answer:
+
+file.read() loads the entire file into RAM.
+
+For large AI datasets this may cause MemoryError.
+
+Instead use:
+
+for line in file:
+
+This processes data one line at a time.
+
+---------------------------------------------------------------
+
+===============================================================
+14. What is a Generator?
+===============================================================
+
+Answer:
+
+A generator is a function that produces values lazily using the yield
+keyword instead of storing all values in memory.
+
+Generators are memory efficient and suitable for large datasets.
+
+---------------------------------------------------------------
+
+===============================================================
+15. Difference between return and yield
+===============================================================
+
+return
+
+- Returns entire result
+- Function terminates
+
+yield
+
+- Produces one value
+- Pauses execution
+- Resumes later
+
+---------------------------------------------------------------
+
+===============================================================
+16. Why are Generators Memory Efficient?
+===============================================================
+
+Answer:
+
+Generators produce values only when requested instead of storing the
+entire dataset in memory.
+
+They maintain only their execution state, making them ideal for AI
+pipelines and streaming data.
+
+---------------------------------------------------------------
+
+===============================================================
+17. What is Generator Exhaustion?
+===============================================================
+
+Answer:
+
+Generators can only be traversed once.
+
+Once all values are consumed, they become exhausted.
+
+A new generator object must be created to iterate again.
+
+---------------------------------------------------------------
+
+===============================================================
+18. Difference between List and Generator
+===============================================================
+
+List
+
+- Stores all data
+- Reusable
+- Higher memory
+
+Generator
+
+- Produces data on demand
+- One-time stream
+- Low memory
+
+Analogy:
+
+List → Downloaded Movie
+
+Generator → Live Cricket Match
+
+---------------------------------------------------------------
+
+===============================================================
+19. What are Type Hints?
+===============================================================
+
+Answer:
+
+Type hints are optional annotations that improve code readability,
+documentation, IDE support, and static type checking.
+
+Example:
+
+def greet(name: str) -> str:
+
+---------------------------------------------------------------
+
+===============================================================
+20. Do Type Hints Enforce Types?
+===============================================================
+
+Answer:
+
+No.
+
+Python ignores type hints during runtime.
+
+Static analysis tools like mypy and pyright use them to detect type
+errors before execution.
+
+---------------------------------------------------------------
+
+===============================================================
+21. What is a Class?
+===============================================================
+
+Answer:
+
+A class is a blueprint used to create objects.
+
+It defines attributes and methods common to all objects.
+
+---------------------------------------------------------------
+
+===============================================================
+22. What is an Object?
+===============================================================
+
+Answer:
+
+An object is an instance of a class.
+
+Each object has its own state and behavior.
+
+---------------------------------------------------------------
+
+===============================================================
+23. What is self?
+===============================================================
+
+Answer:
+
+self is a reference to the current object instance.
+
+It is similar to Java's "this".
+
+---------------------------------------------------------------
+
+===============================================================
+24. What is __init__()?
+===============================================================
+
+Answer:
+
+__init__() is the constructor.
+
+It executes automatically when an object is created and initializes the
+object's attributes.
+
+---------------------------------------------------------------
+
+===============================================================
+25. What are Attributes and Methods?
+===============================================================
+
+Attributes
+
+Variables belonging to an object.
+
+Methods
+
+Functions belonging to an object.
+
+---------------------------------------------------------------
+
+===============================================================
+26. What is a Dataclass?
+===============================================================
+
+Answer:
+
+A dataclass automatically generates constructors and other utility
+methods for data-centric classes.
+
+Benefits:
+
+- Less boilerplate
+- Cleaner code
+- Better readability
+
+---------------------------------------------------------------
+
+===============================================================
+27. What is a Module?
+===============================================================
+
+Answer:
+
+A module is any Python (.py) file containing reusable code.
+
+---------------------------------------------------------------
+
+===============================================================
+28. What is a Package?
+===============================================================
+
+Answer:
+
+A package is a directory containing multiple related Python modules.
+
+Usually identified by an __init__.py file.
+
+---------------------------------------------------------------
+
+===============================================================
+29. Difference between Module and Package
+===============================================================
+
+Module
+
+Single Python file.
+
+Example:
+
+utils.py
+
+Package
+
+Collection of modules.
+
+Example:
+
+services/
+
+models/
+
+utils/
+
+---------------------------------------------------------------
+
+===============================================================
+30. What is Inheritance?
+===============================================================
+
+Answer:
+
+Inheritance allows one class to inherit properties and methods from
+another class.
+
+It promotes code reuse.
+
+Relationship:
+
+IS-A
+
+Example:
+
+AIEngineer IS-A Employee
+
+---------------------------------------------------------------
+
+===============================================================
+31. What is Method Overriding?
+===============================================================
+
+Answer:
+
+Method overriding allows a child class to provide its own implementation
+of a parent method.
+
+---------------------------------------------------------------
+
+===============================================================
+32. What is super()?
+===============================================================
+
+Answer:
+
+super() calls methods of the parent class.
+
+It is commonly used inside constructors to initialize inherited
+attributes.
+
+---------------------------------------------------------------
+
+===============================================================
+33. What is Polymorphism?
+===============================================================
+
+Answer:
+
+Polymorphism allows the same interface to exhibit different behavior
+depending on the object.
+
+Example:
+
+model.predict()
+
+may execute differently for different AI models.
+
+---------------------------------------------------------------
+
+===============================================================
+34. What is an Abstract Base Class (ABC)?
+===============================================================
+
+Answer:
+
+An Abstract Base Class defines a contract.
+
+Child classes must implement all abstract methods before they can be
+instantiated.
+
+---------------------------------------------------------------
+
+===============================================================
+35. What is Composition?
+===============================================================
+
+Answer:
+
+Composition represents a HAS-A relationship.
+
+Example:
+
+ReviewProcessor HAS-A FileManager
+
+Composition is generally preferred over inheritance because it promotes
+loose coupling and better maintainability.
+
+---------------------------------------------------------------
+
+===============================================================
+36. Difference between Inheritance and Composition
+===============================================================
+
+Inheritance
+
+IS-A relationship
+
+High coupling
+
+Example:
+
+Dog IS-A Animal
+
+Composition
+
+HAS-A relationship
+
+Loose coupling
+
+Example:
+
+Car HAS-A Engine
+
+---------------------------------------------------------------
+
+===============================================================
+37. What is an Iterator?
+===============================================================
+
+Answer:
+
+An iterator is an object that returns one element at a time using the
+next() function.
+
+It implements:
+
+__iter__()
+
+__next__()
+
+---------------------------------------------------------------
+
+===============================================================
+38. Difference between Iterable and Iterator
+===============================================================
+
+Iterable
+
+Can be converted into an iterator.
+
+Examples:
+
+List
+
+Tuple
+
+Dictionary
+
+Iterator
+
+Produces values one by one using next().
+
+---------------------------------------------------------------
+
+===============================================================
+39. What happens inside a for loop?
+===============================================================
+
+Answer:
+
+Python internally performs:
+
+iterator = iter(iterable)
+
+while True:
+    item = next(iterator)
+
+until StopIteration is raised.
+
+---------------------------------------------------------------
+
+===============================================================
+40. What is StopIteration?
+===============================================================
+
+Answer:
+
+StopIteration is an exception raised when an iterator has no more
+elements.
+
+It signals the end of iteration.
+
+---------------------------------------------------------------
+
+===============================================================
+41. What is a Decorator?
+===============================================================
+
+Answer:
+
+A decorator is a function that adds additional functionality to another
+function without modifying its source code.
+
+Examples:
+
+@app.get()
+
+@dataclass
+
+@property
+
+@abstractmethod
+
+---------------------------------------------------------------
+
+===============================================================
+42. Why are Decorators Used?
+===============================================================
+
+Answer:
+
+Decorators separate cross-cutting concerns like:
+
+- Logging
+- Authentication
+- Timing
+- Validation
+- Caching
+
+from business logic.
+
+---------------------------------------------------------------
+
+===============================================================
+43. Why do Decorators Need *args and **kwargs?
+===============================================================
+
+Answer:
+
+They allow decorators to work with functions having any number of
+positional or keyword arguments.
+
+This makes decorators reusable.
+
+---------------------------------------------------------------
+
+===============================================================
+44. What is a Wrapper Function?
+===============================================================
+
+Answer:
+
+A wrapper function surrounds another function, executes code before and
+after it, and optionally returns its result.
+
+---------------------------------------------------------------
+
+===============================================================
+45. What is a Context Manager?
+===============================================================
+
+Answer:
+
+A context manager manages resource setup and cleanup automatically.
+
+Examples:
+
+Files
+
+Database connections
+
+AI model loading
+
+---------------------------------------------------------------
+
+===============================================================
+46. What are __enter__() and __exit__()?
+===============================================================
+
+__enter__()
+
+Runs when entering a with block.
+
+__exit__()
+
+Runs automatically when leaving the block, even if an exception occurs.
+
+---------------------------------------------------------------
+
+===============================================================
+47. Why are Context Managers Important?
+===============================================================
+
+Answer:
+
+They prevent resource leaks and guarantee proper cleanup.
+
+---------------------------------------------------------------
+
+===============================================================
+48. Explain OOP in AI Frameworks
+===============================================================
+
+Answer:
+
+Modern AI frameworks heavily rely on OOP.
+
+Examples:
+
+FastAPI()
+
+OpenAI()
+
+SentenceTransformer()
+
+VectorStore()
+
+All are objects created from classes.
+
+Inheritance, polymorphism, and composition help build flexible AI
+frameworks.
+
+---------------------------------------------------------------
+
+===============================================================
+49. Explain Generators in AI
+===============================================================
+
+Answer:
+
+Generators are used to stream large datasets during training.
+
+Instead of loading an entire dataset into RAM, they load one sample,
+process it, discard it, and load the next.
+
+This significantly reduces memory usage.
+
+---------------------------------------------------------------
+
+===============================================================
+50. What Python Topics Have You Learned So Far?
+===============================================================
+
+Answer:
+
+✔ Variables & Data Types
+✔ Lists
+✔ Dictionaries
+✔ Functions
+✔ Exception Handling
+✔ File Handling
+✔ Generators
+✔ Type Hints
+✔ Classes & Objects
+✔ Constructors
+✔ self
+✔ Dataclasses
+✔ Modules
+✔ Packages
+✔ Inheritance
+✔ Method Overriding
+✔ Polymorphism
+✔ Abstract Base Classes
+✔ Composition
+✔ Iterators
+✔ Decorators
+✔ Context Managers
+
+===============================================================
+END OF DAY 1 - DAY 5 INTERVIEW NOTES
+===============================================================
