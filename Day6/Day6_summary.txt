@@ -1,0 +1,500 @@
+
+====================================================================
+                    DAY 6 - PROFESSIONAL PYTHON DEVELOPMENT
+====================================================================
+
+Goal:
+Learn how professional Python projects are structured and configured.
+Today's focus was not AI itself, but the foundation that every
+production-grade Python/AI application requires.
+
+====================================================================
+1. Virtual Environment (venv)
+====================================================================
+
+Definition:
+A Virtual Environment is an isolated Python environment for a specific
+project. Each project can have its own Python packages and versions
+without affecting other projects.
+
+Why do we need it?
+
+• Prevents dependency conflicts.
+• Keeps projects isolated.
+• Makes projects reproducible.
+• Industry standard for Python development.
+
+Example:
+
+Project A
+NumPy 1.26
+
+Project B
+NumPy 2.2
+
+Both can coexist using separate virtual environments.
+
+Create Virtual Environment
+
+python -m venv venv
+
+Activate (Windows)
+
+venv\Scripts\activate
+
+Deactivate
+
+deactivate
+
+Verify Active Python
+
+where python
+
+--------------------------------------------------------------------
+
+====================================================================
+2. Project Structure
+====================================================================
+
+Professional Project Structure
+
+project_name/
+
+│
+├── app/
+│   ├── __init__.py
+│   ├── config.py
+│   ├── logger.py
+│   ├── review_service.py
+│   └── main.py
+│
+├── logs/
+├── .env
+├── .gitignore
+├── requirements.txt
+├── README.md
+└── venv/
+
+Purpose
+
+app/
+→ Contains application source code.
+
+logs/
+→ Stores log files.
+
+venv/
+→ Isolated Python environment.
+
+requirements.txt
+→ Project dependencies.
+
+.env
+→ Environment variables.
+
+README.md
+→ Project documentation.
+
+--------------------------------------------------------------------
+
+====================================================================
+3. __init__.py
+====================================================================
+
+Definition
+
+Marks a directory as a Python package.
+
+Purpose
+
+• Allows importing modules from the package.
+• Can contain package initialization code.
+• Can expose commonly used classes/functions.
+• Can store package metadata.
+
+Most Common Practice
+
+Leave it empty.
+
+Example
+
+from app.review_service import ReviewService
+
+--------------------------------------------------------------------
+
+====================================================================
+4. pip (Package Manager)
+====================================================================
+
+Definition
+
+pip is Python's package manager used to install, update and remove
+third-party libraries.
+
+Common Commands
+
+Install
+
+pip install package_name
+
+Upgrade
+
+pip install --upgrade package_name
+
+Uninstall
+
+pip uninstall package_name
+
+List Packages
+
+pip list
+
+Freeze Installed Packages
+
+pip freeze
+
+--------------------------------------------------------------------
+
+====================================================================
+5. requirements.txt
+====================================================================
+
+Definition
+
+Stores all project dependencies and versions.
+
+Purpose
+
+Allows anyone to recreate the same environment.
+
+Generate
+
+pip freeze > requirements.txt
+
+Install From File
+
+pip install -r requirements.txt
+
+Why Important?
+
+Without it, another developer may install different package versions,
+causing unexpected issues.
+
+--------------------------------------------------------------------
+
+====================================================================
+6. .gitignore
+====================================================================
+
+Definition
+
+Specifies files and folders that Git should ignore.
+
+Common Entries
+
+venv/
+__pycache__/
+*.pyc
+logs/
+.env
+
+Why Ignore Them?
+
+venv/
+→ Very large, can be recreated.
+
+__pycache__/
+→ Auto-generated.
+
+logs/
+→ Runtime files.
+
+.env
+→ Contains sensitive credentials.
+
+--------------------------------------------------------------------
+
+====================================================================
+7. Environment Variables (.env)
+====================================================================
+
+Definition
+
+Stores configuration and secrets outside the source code.
+
+Example
+
+APP_NAME=AI Review Analyzer
+
+MODEL_NAME=Sentiment Model
+
+API_KEY=123456789
+
+LOG_LEVEL=INFO
+
+Read Using
+
+python-dotenv
+
+Example
+
+load_dotenv()
+
+os.getenv("API_KEY")
+
+Benefits
+
+• Secure
+• Configurable
+• Easy to change
+• Environment-specific
+
+Never commit .env to Git.
+
+--------------------------------------------------------------------
+
+====================================================================
+8. Configuration Management
+====================================================================
+
+Purpose
+
+Centralize application settings in one location.
+
+Example
+
+class Config:
+
+    APP_NAME
+
+    API_KEY
+
+    MODEL_NAME
+
+    LOG_LEVEL
+
+Benefits
+
+• Cleaner code
+• Easy maintenance
+• Single source of truth
+
+--------------------------------------------------------------------
+
+====================================================================
+9. Logging
+====================================================================
+
+Definition
+
+Logging records application events, warnings and errors.
+
+Prefer logging over print() in production.
+
+Logging Levels
+
+DEBUG
+
+Detailed debugging information.
+
+INFO
+
+Normal application events.
+
+WARNING
+
+Potential issues.
+
+ERROR
+
+Application errors.
+
+CRITICAL
+
+Severe failures.
+
+Example
+
+logger.info("Application Started")
+
+logger.error("Database Connection Failed")
+
+Benefits
+
+• Debugging
+• Monitoring
+• Auditing
+• Production support
+
+--------------------------------------------------------------------
+
+====================================================================
+10. Review Service
+====================================================================
+
+Purpose
+
+Contains business logic.
+
+Example Responsibilities
+
+Analyze Review
+
+Save Review
+
+Retrieve Review
+
+Business logic should remain separate from configuration and logging.
+
+--------------------------------------------------------------------
+
+====================================================================
+11. Application Flow
+====================================================================
+
+Application Starts
+
+↓
+
+Load Environment Variables
+
+↓
+
+Load Configuration
+
+↓
+
+Initialize Logger
+
+↓
+
+Create Services
+
+↓
+
+Execute Business Logic
+
+↓
+
+Write Logs
+
+↓
+
+Application Ends
+
+--------------------------------------------------------------------
+
+====================================================================
+12. Concepts Learned Today
+====================================================================
+
+✔ Virtual Environment
+
+✔ pip
+
+✔ requirements.txt
+
+✔ .gitignore
+
+✔ Environment Variables
+
+✔ python-dotenv
+
+✔ Configuration Management
+
+✔ Logging
+
+✔ Professional Project Structure
+
+✔ __init__.py
+
+--------------------------------------------------------------------
+
+====================================================================
+13. Interview Questions
+====================================================================
+
+Q1. What is a Virtual Environment?
+
+Answer:
+An isolated Python environment that allows each project to maintain
+its own dependencies without affecting other projects.
+
+--------------------------------------------------
+
+Q2. Why shouldn't we install packages globally?
+
+Answer:
+Global installation can create dependency conflicts between different
+projects.
+
+--------------------------------------------------
+
+Q3. What is pip?
+
+Answer:
+Python's package manager used to install and manage third-party
+libraries.
+
+--------------------------------------------------
+
+Q4. What is requirements.txt?
+
+Answer:
+A file containing all project dependencies, enabling others to recreate
+the exact environment.
+
+--------------------------------------------------
+
+Q5. Why should .env never be committed?
+
+Answer:
+It contains sensitive information such as API keys, passwords and
+secret tokens.
+
+--------------------------------------------------
+
+Q6. Why use Logging instead of print()?
+
+Answer:
+Logging provides structured messages with severity levels and supports
+writing to files, making it suitable for production applications.
+
+--------------------------------------------------
+
+Q7. What is __init__.py?
+
+Answer:
+Marks a directory as a Python package. It may be empty or contain
+package initialization code.
+
+--------------------------------------------------
+
+Q8. What is Configuration Management?
+
+Answer:
+Keeping application settings in a centralized location instead of
+hardcoding them throughout the project.
+
+--------------------------------------------------------------------
+
+====================================================================
+Key Takeaways
+====================================================================
+
+• Every professional Python project begins with a Virtual Environment.
+
+• Never install project dependencies globally.
+
+• Always maintain a requirements.txt file.
+
+• Keep secrets in .env, never in source code.
+
+• Use logging instead of print() in production.
+
+• Organize projects using packages and modules.
+
+• Separate configuration, business logic and logging for maintainable
+  applications.
+
+
